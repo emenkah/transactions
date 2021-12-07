@@ -13,7 +13,8 @@ class Customers(models.Model):
     email = models.EmailField('Email address.', max_length=255, blank=True, null=True)
     account	= models.IntegerField( 'Account No', blank=True, null=True)
     credit_card = models.JSONField()
-
+    created_datetime = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    
     def __str__(self):
         return '{}-{}-{}-{}'.format(self.name, self.email, self.account, self.date_of_birth)
 
