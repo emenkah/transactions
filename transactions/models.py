@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Customers(models.Model):
+class Transactions(models.Model):
     name = models.CharField('Fullname', max_length=256)
     address = models.CharField('Fullname', max_length=256)
     checked = models.BooleanField('Checked', blank=True, null=True)

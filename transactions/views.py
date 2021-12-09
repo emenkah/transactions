@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from .models import Customers
+from .models import Transactions
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import FileSerializer
 import pandas as pd
 from .utility import date_converter, age_computer
+from .tasks import sleepy
 
 # Create your views here.
 
@@ -49,20 +50,21 @@ class ReadDataView(APIView):
         df['date_of_birth'] = df['date_of_birth'].transform(date_converter)
 
         print(df)
-        last_two_records = Customers.objects.filter().order_by('id')[:2]
-        print(list(last_two_records))
+        # last_two_records = Customers.objects.filter().order_by('id')[:2]
+        # print(list(last_two_records))
         
-        last_but1_record = last_two_records[0]
-        last_record = last_two_records[1]
-        print(last_record.name)
+        # last_but1_record = last_two_records[0]
+        # last_record = last_two_records[1]
+        # print(last_record.name)
 
-        df.loc[
-            ( df['name'] == last_record.name) & 
-            (df['name'] == last_record.name)
-        ]
+        # df.loc[
+        #     ( df['name'] == last_record.name) & 
+        #     (df['name'] == last_record.name)
+        # ]
+        
 
         for i in range(len(df)):
-            Customers.objects.create(
+            new_record =Transactions.objects.create(
                 name=df.name[i],
                 address=df.address[i],
                 checked=df.checked[i],
@@ -74,6 +76,10 @@ class ReadDataView(APIView):
                 credit_card=df.credit_card[i]
                 
                 )
+        
+        sleepy.delay()
+
+        print("Completeing api call")
 
         
 
