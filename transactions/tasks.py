@@ -1,7 +1,7 @@
 from celery import shared_task
 from time import sleep
 import pandas as pd
-import sys
+import sys, os
 from .models import Transactions
 from .utility import date_converter, age_computer
 
@@ -17,11 +17,20 @@ def transactions_read(path):
     '''
         Read file using path
     '''
-    df = pd.read_json(path)
+
+    name, extension = os.path.splitext(path)
+    if extension == '.json':
+        df = pd.read_json(path)
+        df['date_of_birth'] = df['date_of_birth'].transform(date_converter)
+    elif extension == '.csv':
+        df = pd.read_csv(path, converters= {'date_of_birth' : date_converter})
+    elif extension == 'xml':
+        df = pd.read_xml(path)
+
     '''
         Apply data transformation to obtain dates in uniform fashion
     '''
-    df['date_of_birth'] = df['date_of_birth'].transform(date_converter)
+    
 
     last_record = None
     last_record = Transactions.objects.all().order_by('position').last()
@@ -29,7 +38,7 @@ def transactions_read(path):
     lowerbound = 0
     if last_record: 
         lowerbound = last_record.position
-        
+
         if lowerbound > len(df) :
             return "Check Records well, Starting point %s is greater than %s of records to be read"%(lowerbound, len(df)) 
         if lowerbound == len(df) :
