@@ -22,25 +22,35 @@ def date_converter(cell):
         date_new_format = date_in_parts[0] + 'T' + date_in_parts[1] + '+00:00'
         date_of_birth = date_new_format
 
-    
     return date_of_birth
 
 
 def age_computer(date_of_birth):
+    '''Utility function to compute age from date of birth.
 
-    '''
-        Utility function to compute age from date of birth
-    '''
-    
-    date_of_birth = "1989-03-21T01:11:13+00:00"
+	Arguments
+	---------
+		date_of_birth (string): of of date of birth in this form 1970-09-12T00:00:00+00:00
 
-    if date_of_birth.find(" ") !=-1 or date_of_birth.find("T") !=-1:
-        date_component = re.split(' | |T', date_of_birth)
-        date_obj = datetime.strptime(date_component[0], "%Y-%m-%d")
-        
-    else: 
-        date_obj = datetime.strptime(date_of_birth, "%Y-%m-%d")
-        
+	Returns
+	-------
+		float: age in days/365
+    Raises
+	------
+		AttributeError: if date is not in any meaningful format 
+	    
+    '''
+    try:
+        if date_of_birth != None and ( date_of_birth.find(" ") != -1 or date_of_birth.find("T") !=-1):
+            date_component = re.split(' | |T', date_of_birth)
+            date_obj = datetime.strptime(date_component[0], "%Y-%m-%d")
+        elif date_of_birth == None:
+            return None
+        else: 
+            date_obj = datetime.strptime(date_of_birth, "%Y-%m-%d")
+    except AttributeError as e:
+
+        return e
     
     age_delta = date.today() - date_obj.date()
     age = age_delta.days/365
