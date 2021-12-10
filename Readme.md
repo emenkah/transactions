@@ -1,6 +1,6 @@
 # Transaction Records System
 
-Project reads in the contents of a JSON-file as a background process into a database. 
+This project reads in the contents of a JSON-file as a background process into a database. 
 Date of birth values are transformed before storage for uniformity
 
 When the process terminates prematurely (by anything, including a SIGTERM, power failure, what have you),  when process is resumed, writing resumes from where it left of. Duplicate entries from writing is prevented.
@@ -17,8 +17,7 @@ Requirement:
 4. Celery(python package is it's in requirement file)
 5. Rabbitmq
 
-Using Sqlite doesn't require much. It works out of the box. 
-Just make sure project is set to use your preferred database. 
+Using Sqlite doesn't require much. It works out of the box. If you have a db preference, just ensure project is set to use your preferred database `finance/setting.py`. 
 
 
 The project comes with a `requirements.txt` file that contains exactly the python packages and dependencies that the project needs.
