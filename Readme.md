@@ -12,9 +12,9 @@ When the process terminates prematurely (by anything, including a SIGTERM, power
 
 Requirement:
 1. Python 3.
-2. SQlite3 or Postgresql.
-3. Django(Rest Framework)
-4. Celery(python package is it's in requirement file)
+2. SQlite3.
+3. Django(Rest Framework).
+4. Celery(python package, so it's in requirement.txt file)
 5. Rabbitmq
 
 Using Sqlite doesn't require much. It works out of the box. If you have a db preference, just ensure project is set to use your preferred database `finance/setting.py`. 
