@@ -8,7 +8,7 @@ When the process terminates prematurely (by anything, including a SIGTERM, power
 
 ## Installation
 
-## Setting Up locally without Docker
+## Setting Up locally
 
 Requirement:
 1. Python 3.
@@ -46,11 +46,11 @@ When the above has been executed sucessfully, you can run the server now.
 python manage.py runserver 
 ```
 
-## Running with Docker
+<!-- ## Running with Docker
 ```bash
     docker build -t tagNameForDocker
     docker run take tagNameForDocker
-```
+``` -->
 
 
 ## Trigger Function to start the read Process
