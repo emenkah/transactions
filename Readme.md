@@ -57,5 +57,5 @@ python manage.py runserver
 Endpoint `http://127.0.0.1:8000/v0.5/transactions/read-data/`
 Pay load:
 {
-    "file_path" : "data/smaller.json" 
+    "file_path" : "path/to/challenge.json" 
 }
