@@ -36,7 +36,7 @@ If setting up for the first time, hence, your database is new, please run the fo
 python manage.py makemigrations
 python manage.py migrate
 ```
-NB: Please notes that project in the repo comes with migration files so you only need to run migrate and not makemigrations.  
+NB: Please note that project in the repo comes with migration files so you only need to run migrate and not makemigrations.  
 
 
 When the above has been executed sucessfully, you can run the server now. 
@@ -47,7 +47,7 @@ When the above has been executed sucessfully, you can run the server now.
 python manage.py runserver 
 ```
 
-## Setting Up locally without Docker
+## Running with Docker
 ```bash
     docker build -t tagNameForDocker
     docker run take tagNameForDocker
