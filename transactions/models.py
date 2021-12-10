@@ -18,17 +18,3 @@ class Transactions(models.Model):
 
     def __str__(self):
         return '{}-{}-{}-{}'.format(self.name, self.email, self.account, self.date_of_birth)
-
-
-# class Track(models.Model):
-#     STATUS_CHOICE = (
-#         ('complete', 'complete'),
-#         ('started', 'started'),
-#     )
-#     created_datetime = models.DateTimeField(auto_now_add=True)
-#     position = models.IntegerField("Position", blank=True, null=True)
-#     status = models.CharField('Status', choices=STATUS_CHOICE, max_length=256, blank=True, null=True)
-    
-#     def __str__(self):
-#         return '{}-{}'.format(self.position, self.created_datetime)
-

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import FileSerializer
 
-from .tasks import sleepy, transactions_read
+from .tasks import transactions_read
 
 # Create your views here.
 
@@ -23,7 +23,6 @@ class ReadDataView(APIView):
 
         transactions_read.delay(path)
        
-        print("Completeing api call")
         data = {}
         data["success"] = True
         data["message"] = "File, (%s), will be read in"%(path)      
