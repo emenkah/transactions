@@ -54,7 +54,7 @@ python manage.py runserver
 
 
 ## Trigger Function to start the read Process
-Endpoint `/v0.5/transactions/read-data/`
+Endpoint `http://127.0.0.1:8000/v0.5/transactions/read-data/`
 Pay load:
 {
     "file_path" : "data/smaller.json" 
