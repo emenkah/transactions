@@ -14,7 +14,8 @@ Requirement:
 1. Python 3.
 2. SQlite3 or Postgresql.
 3. Django(Rest Framework)
-4. Celery
+4. Celery(python package is it's in requirement file)
+5. Rabbitmq
 
 Using Sqlite doesn't require much. It works out of the box. 
 Just make sure project is set to use your preferred database. 

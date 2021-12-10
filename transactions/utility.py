@@ -1,8 +1,30 @@
 import re
 from datetime import datetime, date
 
-def date_converter(cell):
 
+def credit_card_number_match(card_number, pattern="[45][0-9]{12}"):
+
+    '''Regex to perform a pattern to filter out certain records based on credit card numbers
+    
+    Arguments
+	---------
+		pattern (string):  search or sequence pattern
+		card_number (string): Credit card number
+
+	Returns
+	-------
+		bool: True/False
+        
+    '''
+    
+    if re.search(pattern, card_number):
+        return True
+    else:
+        return False
+
+
+def date_converter(cell):
+    
     '''
         Utility function to transform/reformat date for uniformity.
         Dates with timezone indcation, '2003-10-31T13:31:56+00:00', stay the same.
@@ -30,7 +52,7 @@ def age_computer(date_of_birth):
 
 	Arguments
 	---------
-		date_of_birth (string): of of date of birth in this form 1970-09-12T00:00:00+00:00
+		date_of_birth (string): date of birth in this form 1970-09-12T00:00:00+00:00
 
 	Returns
 	-------
