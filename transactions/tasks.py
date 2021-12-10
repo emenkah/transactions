@@ -1,15 +1,10 @@
 from celery import shared_task
-from time import sleep
+
 import pandas as pd
 import sys, os
 from .models import Transactions
 from .utility import date_converter, age_computer
 
-@shared_task
-def sleepy():
-    sleep(10)
-    print("Done in sleepy function from tasks")
-    return None
 
 
 @shared_task
@@ -19,13 +14,19 @@ def transactions_read(path):
     '''
 
     name, extension = os.path.splitext(path)
-    if extension == '.json':
-        df = pd.read_json(path)
-        df['date_of_birth'] = df['date_of_birth'].transform(date_converter)
-    elif extension == '.csv':
-        df = pd.read_csv(path, converters= {'date_of_birth' : date_converter})
-    elif extension == 'xml':
-        df = pd.read_xml(path)
+
+    try:
+        if extension == '.json':
+            df = pd.read_json(path)
+            df['date_of_birth'] = df['date_of_birth'].transform(date_converter)
+        elif extension == '.csv':
+            df = pd.read_csv(path, converters= {'date_of_birth' : date_converter})
+        elif extension == 'xml':
+            df = pd.read_xml(path)
+
+
+    except MemoryError as e: 
+        pass
 
     '''
         Apply data transformation to obtain dates in uniform fashion
