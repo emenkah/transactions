@@ -8,7 +8,7 @@ from .utility import date_converter, age_computer, credit_card_number_match
 
 
 @shared_task
-def transactions_read(path):
+def transactions_read(path, credit_card_check):
     '''
         Read file using path
     '''
@@ -61,11 +61,22 @@ def transactions_read(path):
 
 
         """
-            Credit Card pattern Checker
-            When pattern is ag
+            Credit Card pattern Checker with Regex
+            Configurable pattern is currently set to selecting first digit of credit card number
+            and seting the sequence pattern for it.
+
+            Algorithm is assumes that the first digit should recur a number of times. The 
+            recurrence is dependent on the quotient of the number of digits and the first digit is.
         """
-        pattern ="[45][0-9]{12}"
-        card_pass = credit_card_number_match(df.credit_card[i]["number"], pattern=pattern)
+        card_pass = True
+        if credit_card_check:
+            credit_card_num = df.credit_card[i]['number']
+            recurrence = 3
+            seq = len(credit_card_num)//recurrence
+            first_digit = credit_card_num[0]
+            pattern = "[%s][0-9]{%s}[%s][0-9]{%s}[%s][0-9]+"%(first_digit, seq, first_digit, seq, first_digit)
+            
+            card_pass = credit_card_number_match(credit_card_num, pattern)
         
 
         if (card_pass) and (age == None or (age > 18 and age < 65)):
