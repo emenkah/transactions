@@ -20,8 +20,9 @@ class ReadDataView(APIView):
         serializer = FileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         path = serializer.data['file_path']
+        credit_card_check = serializer.data['credit_card_check']
 
-        transactions_read.delay(path)
+        transactions_read.delay(path, credit_card_check)
        
         data = {}
         data["success"] = True

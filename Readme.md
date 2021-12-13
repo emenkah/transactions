@@ -52,10 +52,15 @@ python manage.py runserver
     docker run take tagNameForDocker
 ``` -->
 
+### Run Celery to register async tasks
+```bash
+celery -A finance worker -l info
+```
 
 ## Trigger Function to start the read Process
-Endpoint `http://127.0.0.1:8000/v0.5/transactions/read-data/`
+Endpoint `http://127.0.0.1:8000/v0.5/transactions/read-data/` <br />
 Pay load:
 {
-    "file_path" : "path/to/challenge.json" 
+    "file_path" : "path/to/challenge.json",
+     "credit_card_check" : false
 }

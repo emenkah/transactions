@@ -2,7 +2,7 @@ import re
 from datetime import datetime, date
 
 
-def credit_card_number_match(card_number, pattern="[45][0-9]{12}"):
+def credit_card_number_match(card_number, pattern):
 
     '''Regex to perform a pattern to filter out certain records based on credit card numbers
     
@@ -16,6 +16,7 @@ def credit_card_number_match(card_number, pattern="[45][0-9]{12}"):
 		bool: True/False
         
     '''
+
     
     if re.search(pattern, card_number):
         return True
